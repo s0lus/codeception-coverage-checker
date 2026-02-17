@@ -12,7 +12,7 @@ use CoverageChecker\ClassChecker;
 use CoverageChecker\Error;
 use CoverageChecker\LineChecker;
 use CoverageChecker\MethodChecker;
-use PHPUnit\Framework\CodeCoverageException;
+use Exception;
 use PHPUnit\TextUI\Output\DefaultPrinter;
 
 class CoverageChecker extends Extension
@@ -73,6 +73,9 @@ class CoverageChecker extends Extension
         }
     }
 
+    /**
+     * @throws Exception
+     */
     public function checkCoverage(PrintResultEvent $event): void
     {
         if ($this->_enabled) {
@@ -82,7 +85,7 @@ class CoverageChecker extends Extension
             }
 
             if (Checker::$hasError) {
-                throw new CodeCoverageException();
+                throw new Exception();
             }
         }
     }
